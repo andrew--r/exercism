@@ -1,8 +1,15 @@
 ﻿module Bob
 
+let (|Silence|Yell|Question|Other|) (input: string) =
+    match true with
+    | _ when input.Trim() = "" -> Silence
+    | _ when input.ToUpper() = input && input.ToLower() <> input -> Yell
+    | _ when input.EndsWith("?") -> Question
+    | _ -> Other
+
 let hey (input: string): string =
     match input with
-    | s when s.Trim() = "" -> "Fine. Be that way!"
-    | s when s |> String.exists(System.Char.IsLetter) && s.ToUpper() = s -> "Whoa, chill out!"
-    | s when s.EndsWith("?") -> "Sure."
+    | Silence -> "Fine. Be that way!"
+    | Yell -> "Whoa, chill out!"
+    | Question -> "Sure."
     | _ -> "Whatever."
