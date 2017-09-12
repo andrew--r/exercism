@@ -1,0 +1,18 @@
+module TwoFerTest
+
+open Xunit
+open FsUnit.Xunit
+
+open TwoFer
+
+[<Fact>]
+let ``No name given`` () =
+    getResponse None |> should equal "One for you, one for me."
+
+[<Fact>]
+let ``A name given`` () =
+    getResponse (Some "Alice") |> should equal "One for Alice, one for me."
+
+[<Fact>]
+let ``Another name given`` () =
+    getResponse (Some "Bob") |> should equal "One for Bob, one for me."
