@@ -1,6 +1,5 @@
 ﻿module TwoFer
 
 let getResponse (input: string option): string =
-    input
-    |> Option.fold (fun _ name -> name) "you"
+    defaultArg input "you"
     |> sprintf "One for %s, one for me."
