@@ -2,15 +2,12 @@
 
 let factors = [(3, "Pling"); (5, "Plang"); (7, "Plong")];
 
-let foldMessages acc (factor,message) = sprintf "%s%s" acc message
-
-let messageOrNumber number message =
-    match message with
-    | "" -> string number
-    | _ -> message
+let getMessages number factors =
+    factors
+    |> List.filter (fun (factor, _) -> number % factor = 0)
+    |> List.map (fun (_, message) -> message)
 
 let convert (number: int): string =
-    factors
-    |> List.filter (fun (factor, message) -> number % factor = 0)
-    |> List.fold foldMessages ""
-    |> messageOrNumber number
+    match getMessages number factors with
+    | [] -> string number
+    | messages -> String.concat "" messages
